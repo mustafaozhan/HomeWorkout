@@ -36,17 +36,21 @@ class PlayerViewModel : ViewModel(), PlayerEvent {
         _effect.postValue(PlayerEffect.BackEffect)
     }
 
-    override fun videoEnd() {
-        when (data.playlist?.last()) {
-            data.currentItem -> _effect.postValue(PlayerEffect.PlaybackEnd)
-            else -> {
-                data.playlist?.get(getCurrentItemPosition() + 1)?.let {
-                    data.currentItem = it
-                    setLoading(true)
-                    _effect.postValue(PlayerEffect.PlayVideoEffect(it.videoUrl))
-                }
-            }
+    override fun videoEnd() = when (data.playlist?.last()) {
+        data.currentItem -> endWorkout()
+        else -> playNextVideo()
+    }
+
+    private fun playNextVideo() {
+        data.playlist?.get(getCurrentItemPosition() + 1)?.let {
+            data.currentItem = it
+            setLoading(true)
+            _effect.postValue(PlayerEffect.PlayVideoEffect(it.videoUrl))
         }
+    }
+
+    private fun endWorkout() {
+        _effect.postValue(PlayerEffect.PlaybackEnd)
     }
 
     private fun setLoading(state: Boolean) {
@@ -67,6 +71,14 @@ class PlayerViewModel : ViewModel(), PlayerEvent {
             delay(TITLE_DISAPPEAR_DELAY)
             _state.value = _state.value?.copy(titleVisibility = false)
         }
+    }
+
+    override fun onSkipClick() {
+        playNextVideo()
+    }
+
+    override fun onCancelClick() {
+        endWorkout()
     }
     // endregion
 }

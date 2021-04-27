@@ -21,6 +21,8 @@ interface PlayerEvent {
     fun exitPlayer()
     fun videoEnd()
     fun videoStart()
+    fun onSkipClick()
+    fun onCancelClick()
 }
 
 data class Data(

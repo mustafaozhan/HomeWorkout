@@ -1,0 +1,4 @@
+<resources>
+    <string name="backend_endpoint">https://jsonblob.com/</string>
+    <string name="api_key">dZhvUeh1b1GevOpcoUQFDXUDVkJTndA8</string>
+</resources>

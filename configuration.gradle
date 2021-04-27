@@ -1,0 +1,31 @@
+/*
+ Copyright (c) 2020 Mustafa Ozhan. All rights reserved.
+ */
+
+def getGitVersion = { ->
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'rev-list', '--first-parent', '--count', 'origin/master'
+            standardOutput = stdout
+        }
+        return Integer.parseInt(stdout.toString().trim())
+    }
+    catch (ignored) {
+        return 1
+    }
+}
+ext {
+    def mayorVersion = 1
+    def minorVersion = 0
+
+    config = [
+            applicationId    : "mustafaozhan.github.com.homeworkout",
+            compileSdkVersion: 30,
+            minSdkVersion    : 21,
+            targetSdkVersion : 30,
+            versionCode      : getGitVersion(),
+            versionName      : "$mayorVersion.$minorVersion.${getGitVersion()}"
+    ]
+
+}

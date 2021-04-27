@@ -1,0 +1,55 @@
+<!--
+  Copyright (c) 2020 Mustafa Ozhan. All rights reserved.
+  -->
+<resources>
+
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="android:colorBackground">@color/color_background</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="android:textColor">@color/color_text</item>
+        <item name="hintTextColor">@color/color_text_weak</item>
+        <item name="android:buttonTint">@color/color_accent</item>
+        <item name="android:itemBackground">@color/color_background_weak</item>
+        <item name="android:editTextColor">@color/color_text</item>
+        <item name="android:textColorHint">@color/color_text_weak</item>
+        <item name="android:tint">@color/color_transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/AppTheme.WindowTransition</item>
+        <item name="android:actionOverflowButtonStyle">@style/ActionButtonOverflow</item>
+        <item name="android:navigationBarColor">@color/color_background_strong</item>
+    </style>
+
+    <style name="AppTheme" parent="BaseAppTheme" />
+
+
+    <style name="AppTheme.Fullscreen">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="AppTheme.Fullscreen.SplashTheme">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="android:windowAnimationStyle">@style/AppTheme.WindowTransition</item>
+    </style>
+
+    <!-- Setting window animation -->
+    <style name="AppTheme.WindowTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <style name="ActionButtonOverflow" parent="@style/Widget.AppCompat.ActionButton.Overflow">
+        <item name="android:tint">@color/color_text</item>
+    </style>
+
+    <style name="BaseToolbarStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:animateLayoutChanges">true</item>
+        <item name="android:background">@color/color_background_strong</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+</resources>

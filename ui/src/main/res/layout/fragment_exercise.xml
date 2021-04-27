@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="mustafaozhan.github.com.ui.exercises.ExerciseViewModel" />
+
+        <variable
+            name="event"
+            type="mustafaozhan.github.com.ui.exercises.ExerciseEvent" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/bar_layout"
+            layout="@layout/layout_exercises_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:event="@{event}"
+            app:vm="@{vm}" />
+
+        <ProgressBar
+            android:id="@+id/loading_view"
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar_layout"
+            app:visibility="@{vm.state.loading}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/exercise_recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar_layout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

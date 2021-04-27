@@ -1,0 +1,61 @@
+/*
+ Copyright (c) 2020 Mustafa Ozhan. All rights reserved.
+ */
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../dependencies.gradle'
+apply from: '../configuration.gradle'
+
+android {
+    compileSdkVersion config.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation(
+            kotlin,
+            androidMaterial,
+            constraintLayout,
+            dagger,
+            timber,
+            navigation,
+            glide
+    )
+
+    kapt(
+            annotations.daggerCompiler,
+            annotations.daggerProcessor,
+            annotations.glide
+    )
+
+    testImplementation(
+            jUnit,
+            mockK,
+            archTesting,
+            coroutinesTest
+    )
+
+    implementation project(':data')
+}

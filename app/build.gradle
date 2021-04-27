@@ -1,0 +1,49 @@
+/*
+ Copyright (c) 2020 Mustafa Ozhan. All rights reserved.
+ */
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+apply from: '../dependencies.gradle'
+apply from: '../configuration.gradle'
+
+android {
+    compileSdkVersion config.compileSdkVersion
+
+    defaultConfig {
+        multiDexEnabled true
+        applicationId config.applicationId
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation(
+            kotlin,
+            dagger,
+            room.roomRuntime,
+            glide
+    )
+
+    kapt(annotations.daggerCompiler)
+
+    implementation project(':ui')
+    implementation project(':data')
+}

@@ -100,6 +100,12 @@ class ExerciseViewModel(
         _effect.postValue(ExerciseEffect.PlayExercise(listOf(item)))
     }
 
+    override fun startWorkout() {
+        _state.value?.exerciseList?.let {
+            _effect.postValue(ExerciseEffect.PlayExercise(it))
+        }
+    }
+
     override fun openFavoriteExercises() {
         _effect.postValue(ExerciseEffect.OpenFavoriteExercises)
     }

@@ -19,6 +19,7 @@ sealed class ExerciseEffect {
 interface ExerciseEvent {
     fun favoriteClicked(item: Exercise)
     fun openExercise(item: Exercise)
+    fun startWorkout()
     fun openFavoriteExercises()
 }
 

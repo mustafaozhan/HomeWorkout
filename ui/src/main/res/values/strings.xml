@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Home Workout</string>
+    <string name="click_back_again_to_exit">Please click BACK again to exit</string>
+    <string name="favorites">Favorites</string>
+    <string name="exercises">Exercises</string>
+    <string name="skip">SKIP</string>
+    <string name="cancel" tools:ignore="ButtonCase">CANCEL</string>
+</resources>

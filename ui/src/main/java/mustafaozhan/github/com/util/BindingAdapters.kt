@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.SearchViewBindingAdapter
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import mustafaozhan.github.com.di.view.GlideApp
@@ -25,12 +26,18 @@ fun View.visibility(visible: Boolean) {
 @BindingAdapter("imageUrl", "placeholderImage", "imageRadius", requireAll = false)
 fun ImageView.loadImageUrl(
     imageUrl: String?,
-    placeholderImage: Drawable?,
+    placeholderImage: Drawable? = ContextCompat.getDrawable(
+        context,
+        R.drawable.ic_glide_error_placeholder
+    ),
     imageCornerRadius: Float?
 ) {
+
     GlideApp
         .with(context)
         .load(imageUrl)
+        .fallback(placeholderImage)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
         .apply {
             if (imageCornerRadius != null) {
                 transform(CenterCrop(), RoundedCorners(imageCornerRadius.toInt()))
@@ -39,7 +46,7 @@ fun ImageView.loadImageUrl(
             }
         }
         .placeholder(placeholderImage)
-        .error(ContextCompat.getDrawable(context, R.drawable.ic_glide_error_placeholder))
+        .error(placeholderImage)
         .into(this)
 }
 

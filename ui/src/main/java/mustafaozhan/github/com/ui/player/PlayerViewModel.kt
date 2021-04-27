@@ -11,6 +11,7 @@ import mustafaozhan.github.com.ui.player.Data.Companion.TITLE_DISAPPEAR_DELAY
 import mustafaozhan.github.com.util.MutableSingleLiveData
 import mustafaozhan.github.com.util.SingleLiveData
 
+@Suppress("TooManyFunctions")
 class PlayerViewModel : ViewModel(), PlayerEvent {
 
     // region SEED
@@ -42,15 +43,28 @@ class PlayerViewModel : ViewModel(), PlayerEvent {
     }
 
     private fun playNextVideo() {
-        data.playlist?.get(getCurrentItemPosition() + 1)?.let {
-            data.currentItem = it
-            setLoading(true)
-            _effect.postValue(PlayerEffect.PlayVideoEffect(it.videoUrl))
+        try {
+            data.playlist?.get(getCurrentItemPosition() + 1)?.let {
+                data.currentItem = it
+                setLoading(true)
+                _effect.postValue(PlayerEffect.PlayVideoEffect(it.videoUrl))
+            }
+        } catch (e: IndexOutOfBoundsException) {
+            endWorkout()
         }
     }
 
     private fun endWorkout() {
-        _effect.postValue(PlayerEffect.PlaybackEnd)
+        if (data.playlist?.size == 1) {
+            _effect.postValue(PlayerEffect.PlaybackEnd)
+        } else {
+            _effect.postValue(
+                PlayerEffect.OpenSummaryScreen(
+                    data.skipCount,
+                    data.playlist?.size ?: -1
+                )
+            )
+        }
     }
 
     private fun setLoading(state: Boolean) {
@@ -74,6 +88,7 @@ class PlayerViewModel : ViewModel(), PlayerEvent {
     }
 
     override fun onSkipClick() {
+        data.skipCount++
         playNextVideo()
     }
 

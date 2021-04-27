@@ -5,4 +5,6 @@
     <string name="exercises">Exercises</string>
     <string name="skip">SKIP</string>
     <string name="cancel" tools:ignore="ButtonCase">CANCEL</string>
+    <string name="finish_training">Finish Training</string>
+    <string name="summary_text">You skipped %s out of %s exercises.</string>
 </resources>

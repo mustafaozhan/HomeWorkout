@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import mustafaozhan.github.com.base.fragment.BaseDBFragment
+import mustafaozhan.github.com.ui.R
 import mustafaozhan.github.com.ui.databinding.FragmentPlayerBinding
 import mustafaozhan.github.com.util.reObserve
 import javax.inject.Inject
@@ -54,6 +55,12 @@ class PlayerFragment : BaseDBFragment<FragmentPlayerBinding>(), MediaPlayer.OnCo
                 PlayerEffect.BackEffect -> requireActivity().onBackPressed()
                 is PlayerEffect.PlayVideoEffect -> playVideo(playerEffect.url)
                 PlayerEffect.PlaybackEnd -> requireActivity().onBackPressed()
+                is PlayerEffect.OpenSummaryScreen -> navigate(
+                    R.id.playerFragment,
+                    PlayerFragmentDirections.actionPlayerFragmentToSummaryFragment(
+                        playerEffect.skipCount, playerEffect.totalCount
+                    )
+                )
             }
         })
     }

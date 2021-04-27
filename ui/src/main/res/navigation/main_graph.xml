@@ -29,6 +29,10 @@
         <argument
             android:name="exerciseList"
             app:argType="mustafaozhan.github.com.model.Exercise[]" />
+
+        <action
+            android:id="@+id/action_playerFragment_to_summaryFragment"
+            app:destination="@id/summaryFragment" />
     </fragment>
 
     <fragment
@@ -39,5 +43,21 @@
         <action
             android:id="@+id/action_favoriteExercisesFragment_to_playerFragment"
             app:destination="@id/playerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/summaryFragment"
+        android:name="mustafaozhan.github.com.ui.summary.SummaryFragment"
+        android:label="SummaryFragment"
+        tools:layout="@layout/fragment_summary">
+        <action
+            android:id="@+id/action_summaryFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment" />
+        <argument
+            android:name="skipped"
+            app:argType="integer" />
+        <argument
+            android:name="total"
+            app:argType="integer" />
     </fragment>
 </navigation>

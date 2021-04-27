@@ -14,6 +14,7 @@ sealed class PlayerEffect {
     object BackEffect : PlayerEffect()
     data class PlayVideoEffect(val url: String) : PlayerEffect()
     object PlaybackEnd : PlayerEffect()
+    data class OpenSummaryScreen(val skipCount: Int, val totalCount: Int) : PlayerEffect()
 }
 
 // Event
@@ -27,7 +28,8 @@ interface PlayerEvent {
 
 data class Data(
     var currentItem: Exercise,
-    var playlist: List<Exercise>? = null
+    var playlist: List<Exercise>? = null,
+    var skipCount: Int = 0
 ) {
     companion object {
         const val TITLE_DISAPPEAR_DELAY: Long = 5000L

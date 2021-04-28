@@ -23,7 +23,7 @@ class PlayerViewModel : ViewModel(), PlayerEvent {
     private var _effect = MutableSingleLiveData<PlayerEffect>()
     var effect: SingleLiveData<PlayerEffect> = _effect
 
-    private lateinit var data: Data
+    lateinit var data: Data
     // endregion
 
     fun setData(exercises: List<Exercise>) {
@@ -32,16 +32,7 @@ class PlayerViewModel : ViewModel(), PlayerEvent {
         _effect.postValue(PlayerEffect.PlayVideoEffect(data.currentItem.videoUrl))
     }
 
-    // region events
-    override fun exitPlayer() {
-        _effect.postValue(PlayerEffect.BackEffect)
-    }
-
-    override fun videoEnd() = when (data.playlist?.last()) {
-        data.currentItem -> endWorkout()
-        else -> playNextVideo()
-    }
-
+    @Suppress("SwallowedException", "TooGenericExceptionCaught")
     private fun playNextVideo() {
         try {
             data.playlist?.get(getCurrentItemPosition() + 1)?.let {
@@ -72,6 +63,16 @@ class PlayerViewModel : ViewModel(), PlayerEvent {
     }
 
     private fun getCurrentItemPosition() = data.playlist?.indexOf(data.currentItem) ?: -1
+
+    // region events
+    override fun exitPlayer() {
+        _effect.postValue(PlayerEffect.BackEffect)
+    }
+
+    override fun videoEnd() = when (data.playlist?.last()) {
+        data.currentItem -> endWorkout()
+        else -> playNextVideo()
+    }
 
     override fun videoStart() {
         _state.value = _state.value?.copy(
